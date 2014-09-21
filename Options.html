@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<title>Dotabuffer Options</title>
+		<link rel="stylesheet" type="text/css" href="options.css">
+		<script src="scripts/jquery-2.0.3.min.js"></script>
+		<script src="scripts/tabs.js"></script>
+	</head>
+<body>
+	<div id="content">
+		<div class="tabs">
+			<ul class="tab-links">
+				<li class="active"><a href="#general">General</a></li>
+				<li><a href="#changelog">Changelog</a></li>
+			</ul>
+
+
+			<div class="tab-content">
+			  <!-- General Options -->
+				<div id="general" class="tab active">
+					<div id="left">
+						<div class="mainDiv" title="This is the last number when you are viewing your own dotabuff page. For instance if your page link is 'http://www.dotabuff.com/players/1234567' you would put '1234567'.">
+							Dotabuff ID:
+						</div>
+					</div>
+					<div id="right">
+						<div class="textbox">
+							<input id="player-id" type="number">
+							<button id="fetchID" title="This requires you to be logged into Dotabuff.">Fetch ID</button>
+						</div>
+					</div>	
+				</div>
+
+			  <!-- Changelog -->
+				<div id="changelog" class="tab">
+					<div id="changelog-content"></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="status" class="save"></div>
+		<div>
+			<button id="save" class="save">Save</button>
+		</div>
+	</div>
+</body>
+	<script src="scripts/options.js"></script>
+</html>
