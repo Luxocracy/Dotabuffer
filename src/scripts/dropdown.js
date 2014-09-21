@@ -90,7 +90,7 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
   	for (var i = 1; i <= 5; i++) {
   		divs_lifetimeStats.push('<div class="type-container"><div class="type-row-lifetime-stats"></div></div>');
   	}
-  	console.log(divs_lifetimeStats);
+
 	$('div#lifetime-stats').append(divs_lifetimeStats);
 
 	var divs_matchWinrate = [
@@ -122,9 +122,9 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
 
 		$.each(data, function(i, data) {
 			var div_append = [
-				'<div class="match-inline-row"><a href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><img alt="'+ data.hero +'" class="hero-image" src="http://www.dotabuff.com/assets/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'.png"></a></div>',
-				'<div class="match-inline-row"><div class="top-row-won-match"><a href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'">'+ data.hero +'</a></div><div class="bot-row">'+ data.bracket +'</div>',
-				'<div class="match-inline-row"><div class="top-row-'+ data.result.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'">'+ data.result +'</div><div class="bot-row">'+ data.time +'</div></div>',
+				'<div class="match-inline-row"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><img alt="'+ data.hero +'" class="hero-image" src="http://www.dotabuff.com/assets/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'.png"></a></div>',
+				'<div class="match-inline-row"><div class="top-row-won-match"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'">'+ data.hero +'</a></div><div class="bot-row">'+ data.bracket +'</div>',
+				'<div class="match-inline-row"><div class="top-row-'+ data.result.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><a class="tab-link" href="'+ data.link_result.replace("/matches/", "http://www.dotabuff.com/matches/") +'">'+ data.result +'</a></div><div class="bot-row">'+ data.time +'</div></div>',
 				'<div class="match-inline-row"><div class="top-row">'+ data.type +'</div><div class="bot-row">'+ data.mode +'</div></div>',
 				'<div class="match-inline-row"><div class="top-row">'+ data.duration +'</div><div class="bot-row bar">'+ data.bar_duration +'</div></div>',
 				'<div class="match-inline-row"><div class="top-row">'+ data.kda +'</div><div class="bot-row bar">'+ data.bar_kda +'</div></div>'
@@ -133,15 +133,15 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
 		})
 	})
 
-  // Create divs for Latest Matches Tab
+  // Create divs for Most Played Tab
 	$.each(data_mostPlayed, function(i, data) {
 		$('div#most-played').append('<div class="match-row"></div>');
 		var count = 2 + i;
 
 		$.each(data, function(i, data) {
 			var div_append = [
-				'<div class="match-inline-row"><a href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><img alt="'+ data.hero +'" class="hero-image" src="http://www.dotabuff.com/assets/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'.png"></a></div>',
-				'<div class="match-inline-row"><div class="top-row-won-match"><a href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'">'+ data.hero +'</a></div><div class="bot-row"></div>',
+				'<div class="match-inline-row"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><img alt="'+ data.hero +'" class="hero-image" src="http://www.dotabuff.com/assets/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'.png"></a></div>',
+				'<div class="match-inline-row"><div class="top-row-won-match"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'">'+ data.hero +'</a></div><div class="bot-row"></div>',
 				'<div class="match-inline-row"><div class="top-row">'+ data.matches +'</div><div class="bot-row bar">'+ data.bar_matches +'</div></div>',
 				'<div class="match-inline-row"><div class="top-row">'+ data.winrate +'</div><div class="bot-row bar">'+ data.bar_winrate +'</div></div>',
 				'<div class="match-inline-row"><div class="top-row">'+ data.kda +'</div><div class="bot-row bar">'+ data.bar_kda +'</div></div>'
@@ -177,13 +177,15 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
 		$.each(data, function(i, data) {
 			var div_append = [
 				'<div class="match-inline-row-friend"><img class="hero-image" src="'+ data.image +'"></div>',
-				'<div class="match-inline-row-friend"><div class="top-row-won-match">'+ data.friend.replace("/players/", "http://www.dotabuff.com/players/") +'</div><div class="bot-row"></div>',
+				'<div class="match-inline-row-friend"><div class="top-row-won-match">'+ data.friend.replace("/players/", "http://www.dotabuff.com/players/").replace('<a ', '<a class="tab-link"') +'</div><div class="bot-row"></div>',
 				'<div class="match-inline-row-friend"><div class="top-row">'+ data.matches +'</div><div class="bot-row bar">'+ data.bar_matches +'</div></div>',
 				'<div class="match-inline-row-friend"><div class="top-row">'+ data.winrate +'</div><div class="bot-row bar">'+ data.bar_winrate +'</div></div>'
 			];
 			$('div#friends div.match-row-friend:nth-of-type('+ count +')').append(div_append);
 		})
 	})
+
+	attachListener(); // Attach the <a class="tab-link"> listener
 }
 
 function noPlayerID() {
@@ -223,6 +225,14 @@ function removePopup(from) {
 	$('div#float').css("left", null);
 	$('div#float').css("top", null);
 	$(document).off("click");
+}
+
+// Function that attaches the <a class="tab-link"> listener
+function attachListener () {
+	$('a.tab-link').on('click', function(event) {
+		event.preventDefault();
+		openTab(event.currentTarget.href)
+	})
 }
 
 // Function that is run when a link is clicked 

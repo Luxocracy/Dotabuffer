@@ -29,7 +29,7 @@ function grabInfo(pend) {
 			var latestMatches 		= $(html).find('div.primary section:nth-of-type(2) article table tbody tr');
 			var lifetimeStats 		= $(html).find('div.secondary section:nth-of-type(1) article table tbody');
 			var friends				= $(html).find('div.secondary section:nth-of-type(2) article table tbody tr');
-			console.log(friends);
+			console.log(latestMatches);
 
 		  // In stats find
 				data_stats = [{ 
@@ -61,6 +61,7 @@ function grabInfo(pend) {
 				data_latestMatches[i] = [{ 
 					hero: 			tr.childNodes[1].childNodes[0].innerText,
 					result: 		tr.childNodes[2].childNodes[0].innerText,
+					link_result:	tr.childNodes[2].childNodes[0].pathname,
 					type: 			tr.childNodes[3].childNodes[0].textContent,
 					duration: 		tr.childNodes[4].childNodes[0].textContent,
 					kda: 			tr.childNodes[5].childNodes[0].innerText,
