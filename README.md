@@ -7,8 +7,8 @@ Currently this will only show you your Latest Matches, Most Played Heroes, Lifet
 ![Dotabuffer Screenshot](http://i.imgur.com/9TFbpbu.png "Dotabuffer Dropdown Screenshot")
 
 ## Download
-* Chrome Users: [Master.zip](https://github.com/luxocracy/dotabuffer/archive/master.zip)
-* Opera Users: [Dotabuffer -release.crx](https://github.com/Luxocracy/Dotabuffer/blob/master/Dotabuffer%20-release.crx?raw=true)
+* Chrome Users: [Dotabuffer-master.zip](https://github.com/luxocracy/dotabuffer/archive/master.zip)
+* Opera Users: [Dotabuffer-release.crx](https://github.com/Luxocracy/Dotabuffer/blob/master/Dotabuffer-release.crx?raw=true)
 
 ## Usage
 ### For Chrome Users
