@@ -4,7 +4,7 @@ Dotabuffer
 Currently this will only show you your Latest Matches, Most Played Heroes, Lifetime Stats and Friend Stats.
 
 #### Screenshot
-![Dotabuffer Screenshot](http://i.imgur.com/9TFbpbu.png "Dotabuffer Dropdown Screenshot")
+![Dotabuffer Screenshot](http://i.imgur.com/RjBEMHk.png "Dotabuffer Dropdown Screenshot")
 
 ## Download
 * Chrome Users: [Dotabuffer-master.zip](https://github.com/luxocracy/dotabuffer/archive/master.zip)
@@ -26,6 +26,10 @@ Currently this will only show you your Latest Matches, Most Played Heroes, Lifet
 5. The extension should now be loaded.
 
 ## Version 
+* Version 0.1.2
+* - Fixed an issue when the friends stat was empty.
+* - Fixed a css issue when you had wins & losses in the thousands.
+
 * Version 0.1.1
 * - Made links behave more approriately when middle-clicked
 * - Added link to the match accessable by clicking on "won match" or "lost match".

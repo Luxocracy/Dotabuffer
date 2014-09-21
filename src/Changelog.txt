@@ -1,20 +1,10 @@
 // Version 0.1
-- Nothing yet just for testing purpose
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-- Nam tincidunt ipsum vel iaculis malesuada.
-- Mauris eget nunc ut neque gravida eleifend at dapibus justo.
-- Proin eget urna sagittis, molestie justo non, ultricies quam.
+- Initial release
 
-// Version 0.2
-- Nothing yet just for testing purpose
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-- Nam tincidunt ipsum vel iaculis malesuada.
-- Mauris eget nunc ut neque gravida eleifend at dapibus justo.
-- Proin eget urna sagittis, molestie justo non, ultricies quam.
+// Version 0.1.1
+- Made links behave more approriately when middle-clicked
+- Added link to the match accessable by clicking on "won match" or "lost match".
 
-// Version 0.3
-- Nothing yet just for testing purpose
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-- Nam tincidunt ipsum vel iaculis malesuada.
-- Mauris eget nunc ut neque gravida eleifend at dapibus justo.
-- Proin eget urna sagittis, molestie justo non, ultricies quam.
+// Version 0.1.2
+- Fixed an issue when the friends stat was empty.
+- Fixed a css issue when you had wins & losses in the thousands.

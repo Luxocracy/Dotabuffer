@@ -118,6 +118,7 @@ div .loadingtrail
 	float: right;
 	font-size: 12px;
 	width: 40%;
+	height: 30px;
 	margin-top: 3px;
 }
 
@@ -135,7 +136,7 @@ div .loadingtrail
 
 .stats-bot
 {
-
+	white-space: nowrap;
 }
 
 .win

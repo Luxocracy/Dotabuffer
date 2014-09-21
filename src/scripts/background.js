@@ -109,7 +109,6 @@ function grabInfo(pend) {
 						bar_matches: 	tr.childNodes[1].childNodes[1].innerHTML,
 						bar_winrate: 	tr.childNodes[2].childNodes[1].innerHTML
 					}]
-					//console.log(category_array);
 				})
 				data_lifetimeStats[i] = category_array;
 				//console.log(data_lifetimeStats);
@@ -117,7 +116,8 @@ function grabInfo(pend) {
 
 		  // For each matched in friends
 			$.each(friends, function(i, tr) {
-				data_friends[i] = [{ 
+			  if (tr.textContent != "No Friends") {
+			  	data_friends[i] = [{ 
 					image: 			tr.childNodes[0].childNodes[0].childNodes[0].childNodes[0].src,
 					friend: 		tr.childNodes[1].innerHTML,
 					matches: 		tr.childNodes[2].innerText,
@@ -126,6 +126,7 @@ function grabInfo(pend) {
 					bar_matches: 	tr.childNodes[2].childNodes[1].innerHTML,
 					bar_winrate: 	tr.childNodes[3].childNodes[1].innerHTML
 				}]
+			  }
 				//console.log(data_friends);
 			})
 
