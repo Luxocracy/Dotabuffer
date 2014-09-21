@@ -30,9 +30,7 @@ Currently this will only show you your Latest Matches, Most Played Heroes, Lifet
 * - Fixed an issue when the friends stat was empty.
 * - Fixed a css issue when you had wins & losses in the thousands.
 
-* Version 0.1.1
-* - Made links behave more approriately when middle-clicked
-* - Added link to the match accessable by clicking on "won match" or "lost match".
+[Full Changelog](https://github.com/Luxocracy/Dotabuffer/blob/master/src/Changelog.txt)
 
 ## Contact
 * E-mail: luxor355@gmail.com
