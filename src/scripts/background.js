@@ -33,7 +33,7 @@ function grabInfo(pend) {
 
 		  // In stats find
 				data_stats = [{ 
-					lastmatch: 		stats[0].childNodes[1].innerHTML, 
+					time: 		stats[0].childNodes[1].innerHTML, 
 					win: 			stats[1].childNodes[1].childNodes[0].childNodes[0].textContent,
 					loss: 			stats[1].childNodes[1].childNodes[0].childNodes[2].textContent,
 					abandon: 		stats[1].childNodes[1].childNodes[0].childNodes[4].textContent,

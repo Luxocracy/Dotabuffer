@@ -58,7 +58,7 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
 	$('div#record div.stats-bot span.loss').text(data_stats[0].loss);
 	$('div#record div.stats-bot span.abandon').text(data_stats[0].abandon);
 	$('div#win-rate div.stats-bot').text(data_stats[0].winrate);
-	$('div#last-match div.stats-bot').html(data_stats[0].lastmatch);
+	$('div#last-match div.stats-bot').html('<span title="'+ (data_stats[0].time.match(/>.*</))[0].slice(1, -1) +'">'+ calculateTime(data_stats[0]) +'</span>');
 
 // Type menus
   // Type menus for Latest Matches
@@ -121,10 +121,11 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
 		var count = 2 + i;
 
 		$.each(data, function(i, data) {
+			var matchTitle = (data.time.match(/>.*</))[0].slice(1, -1);
 			var div_append = [
 				'<div class="match-inline-row"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><img alt="'+ data.hero +'" class="hero-image" src="http://www.dotabuff.com/assets/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'.png"></a></div>',
 				'<div class="match-inline-row"><div class="top-row-won-match"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'">'+ data.hero +'</a></div><div class="bot-row">'+ data.bracket +'</div>',
-				'<div class="match-inline-row"><div class="top-row-'+ data.result.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><a class="tab-link" href="'+ data.link_result.replace("/matches/", "http://www.dotabuff.com/matches/") +'">'+ data.result +'</a></div><div class="bot-row">'+ data.time +'</div></div>',
+				'<div class="match-inline-row"><div class="top-row-'+ data.result.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><a class="tab-link" href="'+ data.link_result.replace("/matches/", "http://www.dotabuff.com/matches/") +'">'+ data.result +'</a></div><div class="bot-row" title="'+ matchTitle +'">'+ calculateTime(data) +'</div></div>',
 				'<div class="match-inline-row"><div class="top-row">'+ data.type +'</div><div class="bot-row">'+ data.mode +'</div></div>',
 				'<div class="match-inline-row"><div class="top-row">'+ data.duration +'</div><div class="bot-row bar">'+ data.bar_duration +'</div></div>',
 				'<div class="match-inline-row"><div class="top-row">'+ data.kda +'</div><div class="bot-row bar">'+ data.bar_kda +'</div></div>'
@@ -186,6 +187,43 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
 	})
 
 	attachListener(); // Attach the <a class="tab-link"> listener
+}
+
+function calculateTime (data) {
+  // Convert and get dates
+	var dDate = data.time.match(/datetime=".*"\s/);
+		dDate = dDate[0].slice(10).slice(0, -2);;
+		dDate = new Date(dDate);
+	var nDate = new Date();
+
+  // Calculate time difference
+	var hoursDiff 	= Math.round((nDate - dDate) / 1000);
+	var timeSince	= [{
+			days: Math.floor(hoursDiff / 86400),
+			hours: Math.floor(hoursDiff / 3600),
+			minutes: Math.ceil(hoursDiff / 60),
+			since: ""
+		}];
+	var endText;
+
+	if (timeSince[0].days >= 365) {
+		timeSince.since = Math.round(timeSince[0].days / 365); 
+		if (timeSince.since == 1) { endText = " year ago" } else { endText = " years ago" };
+	} else if (timeSince[0].days >= 30) {
+		timeSince.since = Math.round(timeSince[0].days / 30);
+		if (months == 1) { endText = " month ago" } else { endText = " months ago" };
+	} else if (timeSince[0].days >= 1) {
+		timeSince.since = timeSince[0].days;
+		if (timeSince[0].days == 1) { endText = " day ago" } else { endText = " days ago" };
+	} else if (timeSince[0].hours >= 1) {
+		timeSince.since = timeSince[0].hours;
+		if (timeSince[0].days == 1) { endText = " hour ago" } else { endText = " hours ago" };
+	} else {
+		timeSince.since = timeSince[0].minutes;
+		if (timeSince[0].days <= 1) { endText = " minute ago" } else { endText = " minutes ago" };
+	}
+	timeSince.since = timeSince.since + endText;
+	return timeSince.since;
 }
 
 function noPlayerID() {
