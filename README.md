@@ -26,9 +26,8 @@ Currently this will only show you your Latest Matches, Most Played Heroes, Lifet
 5. The extension should now be loaded.
 
 ## Version 
-* Version 0.1.2
-* - Fixed an issue when the friends stat was empty.
-* - Fixed a css issue when you had wins & losses in the thousands.
+* Version 0.1.3
+* - Improved the date display of matches and latest match to say "x years/months/days/hours ago" instead of just the date.
 
 [Full Changelog](https://github.com/Luxocracy/Dotabuffer/blob/master/src/Changelog.txt)
 
