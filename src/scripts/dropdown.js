@@ -54,11 +54,11 @@ function fetchData() {
 // Function waiting for the information from GrabInfo
 function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifetimeStats, data_friends) {
   // Top stats
-	$('div#record div.stats-bot span.win').text(data_stats[0].win);
-	$('div#record div.stats-bot span.loss').text(data_stats[0].loss);
-	$('div#record div.stats-bot span.abandon').text(data_stats[0].abandon);
-	$('div#win-rate div.stats-bot').text(data_stats[0].winrate);
-	$('div#last-match div.stats-bot').html('<span title="'+ (data_stats[0].time.match(/>.*</))[0].slice(1, -1) +'">'+ calculateTime(data_stats[0]) +'</span>');
+	$('div#record div.stats-bot span.win').text(data_stats.win);
+	$('div#record div.stats-bot span.loss').text(data_stats.loss);
+	$('div#record div.stats-bot span.abandon').text(data_stats.abandon);
+	$('div#win-rate div.stats-bot').text(data_stats.winrate);
+	$('div#last-match div.stats-bot').html('<span title="'+ (data_stats.time.match(/>.*</))[0].slice(1, -1) +'">'+ calculateTime(data_stats) +'</span>');
 
 // Type menus
   // Type menus for Latest Matches
@@ -101,9 +101,9 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
    // Type of Stat
 	$('div#lifetime-stats div.type-container:nth-of-type(1) div.type-row-lifetime-stats').append('<div class="match-top-row-lifetime-stats">Gamemode</div>');		// Gamemode
 	$('div#lifetime-stats div.type-container:nth-of-type(2) div.type-row-lifetime-stats').append('<div class="match-top-row-lifetime-stats">Faction</div>');		// Faction
-	$('div#lifetime-stats div.type-container:nth-of-type(3) div.type-row-lifetime-stats').append('<div class="match-top-row-lifetime-stats">Lobby Type</div>');	// Lobby Type
+	$('div#lifetime-stats div.type-container:nth-of-type(3) div.type-row-lifetime-stats').append('<div class="match-top-row-lifetime-stats">Lobby Type</div>');		// Lobby Type
 	$('div#lifetime-stats div.type-container:nth-of-type(4) div.type-row-lifetime-stats').append('<div class="match-top-row-lifetime-stats">Lifetime</div>');		// Lifetime
-	$('div#lifetime-stats div.type-container:nth-of-type(5) div.type-row-lifetime-stats').append('<div class="match-top-row-lifetime-stats">Region</div>');		// Region
+	$('div#lifetime-stats div.type-container:nth-of-type(5) div.type-row-lifetime-stats').append('<div class="match-top-row-lifetime-stats">Region</div>');			// Region
   // Divs for number of matches and winrate
 	for (var i = 1; i <= 5; i++) {
 		$('div#lifetime-stats div.type-container:nth-of-type('+ i +') div.type-row-lifetime-stats').append(divs_matchWinrate);
@@ -119,36 +119,30 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
 	$.each(data_latestMatches, function(i, data) {
 		$('div#latest-matches').append('<div class="match-row"></div>');
 		var count = 2 + i;
-
-		$.each(data, function(i, data) {
-			var matchTitle = (data.time.match(/>.*</))[0].slice(1, -1);
-			var div_append = [
-				'<div class="match-inline-row"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><img alt="'+ data.hero +'" class="hero-image" src="http://www.dotabuff.com/assets/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'.png"></a></div>',
-				'<div class="match-inline-row"><div class="top-row-won-match"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'">'+ data.hero +'</a></div><div class="bot-row">'+ data.bracket +'</div>',
-				'<div class="match-inline-row"><div class="top-row-'+ data.result.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><a class="tab-link" href="'+ data.link_result.replace("/matches/", "http://www.dotabuff.com/matches/") +'">'+ data.result +'</a></div><div class="bot-row" title="'+ matchTitle +'">'+ calculateTime(data) +'</div></div>',
-				'<div class="match-inline-row"><div class="top-row">'+ data.type +'</div><div class="bot-row">'+ data.mode +'</div></div>',
-				'<div class="match-inline-row"><div class="top-row">'+ data.duration +'</div><div class="bot-row bar">'+ data.bar_duration +'</div></div>',
-				'<div class="match-inline-row"><div class="top-row">'+ data.kda +'</div><div class="bot-row bar">'+ data.bar_kda +'</div></div>'
-			];
-			$('div#latest-matches div.match-row:nth-of-type('+ count +')').append(div_append);
-		})
+		var matchTitle = (data.time.match(/>.*</))[0].slice(1, -1);
+		var div_append = [
+			'<div class="match-inline-row"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><img alt="'+ data.hero +'" class="hero-image" src="http://www.dotabuff.com/assets/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'.png"></a></div>',
+			'<div class="match-inline-row"><div class="top-row-won-match"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'">'+ data.hero +'</a></div><div class="bot-row">'+ data.bracket +'</div>',
+			'<div class="match-inline-row"><div class="top-row-'+ data.result.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><a class="tab-link" href="'+ data.link_result.replace("/matches/", "http://www.dotabuff.com/matches/") +'">'+ data.result +'</a></div><div class="bot-row" title="'+ matchTitle +'">'+ calculateTime(data) +'</div></div>',
+			'<div class="match-inline-row"><div class="top-row">'+ data.type +'</div><div class="bot-row">'+ data.mode +'</div></div>',
+			'<div class="match-inline-row"><div class="top-row">'+ data.duration +'</div><div class="bot-row bar">'+ data.bar_duration +'</div></div>',
+			'<div class="match-inline-row"><div class="top-row">'+ data.kda +'</div><div class="bot-row bar">'+ data.bar_kda +'</div></div>'
+		];
+		$('div#latest-matches div.match-row:nth-of-type('+ count +')').append(div_append);
 	})
 
   // Create divs for Most Played Tab
 	$.each(data_mostPlayed, function(i, data) {
 		$('div#most-played').append('<div class="match-row"></div>');
 		var count = 2 + i;
-
-		$.each(data, function(i, data) {
-			var div_append = [
-				'<div class="match-inline-row"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><img alt="'+ data.hero +'" class="hero-image" src="http://www.dotabuff.com/assets/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'.png"></a></div>',
-				'<div class="match-inline-row"><div class="top-row-won-match"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'">'+ data.hero +'</a></div><div class="bot-row"></div>',
-				'<div class="match-inline-row"><div class="top-row">'+ data.matches +'</div><div class="bot-row bar">'+ data.bar_matches +'</div></div>',
-				'<div class="match-inline-row"><div class="top-row">'+ data.winrate +'</div><div class="bot-row bar">'+ data.bar_winrate +'</div></div>',
-				'<div class="match-inline-row"><div class="top-row">'+ data.kda +'</div><div class="bot-row bar">'+ data.bar_kda +'</div></div>'
-			];
-			$('div#most-played div.match-row:nth-of-type('+ count +')').append(div_append);
-		})
+		var div_append = [
+			'<div class="match-inline-row"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><img alt="'+ data.hero +'" class="hero-image" src="http://www.dotabuff.com/assets/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'.png"></a></div>',
+			'<div class="match-inline-row"><div class="top-row-won-match"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'">'+ data.hero +'</a></div><div class="bot-row"></div>',
+			'<div class="match-inline-row"><div class="top-row">'+ data.matches +'</div><div class="bot-row bar">'+ data.bar_matches +'</div></div>',
+			'<div class="match-inline-row"><div class="top-row">'+ data.winrate +'</div><div class="bot-row bar">'+ data.bar_winrate +'</div></div>',
+			'<div class="match-inline-row"><div class="top-row">'+ data.kda +'</div><div class="bot-row bar">'+ data.bar_kda +'</div></div>'
+		];
+		$('div#most-played div.match-row:nth-of-type('+ count +')').append(div_append);
 	})
 
   // Create divs for Lifetime Stats Tab
@@ -158,15 +152,14 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
 
 		$.each(data, function(i, data) {
 			$('div#lifetime-stats div.type-container:nth-of-type('+ count +')').append('<div class="match-row"></div>');
-			$.each(data, function(i, data) {
-				var div_append = [
-					'<div class="match-inline-row-lifetime-stats"><div class="top-row">'+ data.stat +'</div><div class="bot-row bar"></div></div>',
-					'<div class="match-inline-row-lifetime-stats"><div class="top-row">'+ data.matches +'</div><div class="bot-row bar">'+ data.bar_matches +'</div></div>',
-					'<div class="match-inline-row-lifetime-stats"><div class="top-row">'+ data.winrate +'</div><di  class="bot-row bar">'+ data.bar_winrate +'</div></div>'
-				];
-				$('div#lifetime-stats div.type-container:nth-of-type('+ count +') div.match-row:nth-of-type('+ rowCount +')').append(div_append);
-				rowCount++;
-			})
+
+			var div_append = [
+				'<div class="match-inline-row-lifetime-stats"><div class="top-row">'+ data.stat +'</div><div class="bot-row bar"></div></div>',
+				'<div class="match-inline-row-lifetime-stats"><div class="top-row">'+ data.matches +'</div><div class="bot-row bar">'+ data.bar_matches +'</div></div>',
+				'<div class="match-inline-row-lifetime-stats"><div class="top-row">'+ data.winrate +'</div><di  class="bot-row bar">'+ data.bar_winrate +'</div></div>'
+			];
+			$('div#lifetime-stats div.type-container:nth-of-type('+ count +') div.match-row:nth-of-type('+ rowCount +')').append(div_append);
+			rowCount++;
 		})
 	})
 
@@ -174,58 +167,55 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
 	$.each(data_friends, function(i, data) {
 		$('div#friends').append('<div class="match-row-friend"></div>');
 		var count = 2 + i;
-
-		$.each(data, function(i, data) {
-			var div_append = [
-				'<div class="match-inline-row-friend"><img class="hero-image" src="'+ data.image +'"></div>',
-				'<div class="match-inline-row-friend"><div class="top-row-won-match">'+ data.friend.replace("/players/", "http://www.dotabuff.com/players/").replace('<a ', '<a class="tab-link"') +'</div><div class="bot-row"></div>',
-				'<div class="match-inline-row-friend"><div class="top-row">'+ data.matches +'</div><div class="bot-row bar">'+ data.bar_matches +'</div></div>',
-				'<div class="match-inline-row-friend"><div class="top-row">'+ data.winrate +'</div><div class="bot-row bar">'+ data.bar_winrate +'</div></div>'
-			];
-			$('div#friends div.match-row-friend:nth-of-type('+ count +')').append(div_append);
-		})
+		var div_append = [
+			'<div class="match-inline-row-friend"><img class="hero-image" src="'+ data.image +'"></div>',
+			'<div class="match-inline-row-friend"><div class="top-row-won-match">'+ data.friend.replace("/players/", "http://www.dotabuff.com/players/").replace('<a ', '<a class="tab-link"') +'</div><div class="bot-row"></div>',
+			'<div class="match-inline-row-friend"><div class="top-row">'+ data.matches +'</div><div class="bot-row bar">'+ data.bar_matches +'</div></div>',
+			'<div class="match-inline-row-friend"><div class="top-row">'+ data.winrate +'</div><div class="bot-row bar">'+ data.bar_winrate +'</div></div>'
+		];
+		$('div#friends div.match-row-friend:nth-of-type('+ count +')').append(div_append);
 	})
 
 	attachListener(); // Attach the <a class="tab-link"> listener
 }
 
+// Function that calculates the time since the match was played.
 function calculateTime (data) {
   // Convert and get dates
-	var dDate = data.time.match(/datetime=".*"\s/);
-		dDate = dDate[0].slice(10).slice(0, -2);;
-		dDate = new Date(dDate);
+	var dDate = new Date(data.time.match(/datetime=".*"\s/)[0].slice(10).slice(0, -2));
 	var nDate = new Date();
 
   // Calculate time difference
 	var hoursDiff 	= Math.round((nDate - dDate) / 1000);
-	var timeSince	= [{
+	var timeSince	= {
 			days: Math.floor(hoursDiff / 86400),
 			hours: Math.floor(hoursDiff / 3600),
 			minutes: Math.ceil(hoursDiff / 60),
 			since: ""
-		}];
+		};
 	var endText;
 
-	if (timeSince[0].days >= 365) {
-		timeSince.since = Math.round(timeSince[0].days / 365); 
+	if (timeSince.days >= 365) {
+		timeSince.since = Math.round(timeSince.days / 365); 
 		if (timeSince.since == 1) { endText = " year ago" } else { endText = " years ago" };
-	} else if (timeSince[0].days >= 30) {
-		timeSince.since = Math.round(timeSince[0].days / 30);
+	} else if (timeSince.days >= 30) {
+		timeSince.since = Math.round(timeSince.days / 30);
 		if (months == 1) { endText = " month ago" } else { endText = " months ago" };
-	} else if (timeSince[0].days >= 1) {
-		timeSince.since = timeSince[0].days;
-		if (timeSince[0].days == 1) { endText = " day ago" } else { endText = " days ago" };
-	} else if (timeSince[0].hours >= 1) {
-		timeSince.since = timeSince[0].hours;
-		if (timeSince[0].days == 1) { endText = " hour ago" } else { endText = " hours ago" };
+	} else if (timeSince.days >= 1) {
+		timeSince.since = timeSince.days;
+		if (timeSince.days == 1) { endText = " day ago" } else { endText = " days ago" };
+	} else if (timeSince.hours >= 1) {
+		timeSince.since = timeSince.hours;
+		if (timeSince.days == 1) { endText = " hour ago" } else { endText = " hours ago" };
 	} else {
-		timeSince.since = timeSince[0].minutes;
-		if (timeSince[0].days <= 1) { endText = " minute ago" } else { endText = " minutes ago" };
+		timeSince.since = timeSince.minutes;
+		if (timeSince.days <= 1) { endText = " minute ago" } else { endText = " minutes ago" };
 	}
 	timeSince.since = timeSince.since + endText;
 	return timeSince.since;
 }
 
+// Function that is run when noPlayerID could be found in localStorage
 function noPlayerID() {
   // Recommend Recache Float
 	$('div#float').empty();
@@ -255,7 +245,7 @@ function noPlayerID() {
 }
 
 // Function for removing the popup
-function removePopup(from) {
+function removePopup() {
 
 	$('body').css("opacity", "1");
 	$('div#float').hide();

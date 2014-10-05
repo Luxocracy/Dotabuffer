@@ -26,8 +26,9 @@ Currently this will only show you your Latest Matches, Most Played Heroes, Lifet
 5. The extension should now be loaded.
 
 ## Version 
-* Version 0.1.3
-* - Improved the date display of matches and latest match to say "x years/months/days/hours ago" instead of just the date.
+* Version 0.1.4
+* - Optimized some stupid mistakes in the code...
+* - Enabled async ajax request. Which should make opening the extension more responsive. (Was disabled out of habit because of issues in the past.)
 
 [Full Changelog](https://github.com/Luxocracy/Dotabuffer/blob/master/src/Changelog.txt)
 

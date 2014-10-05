@@ -15,7 +15,7 @@ function grabInfo(pend) {
 		type: "GET",		
 		url: currenturl,
 		dataType: "HTML",
-		async: false,
+		async: true,
 		success: function(html) {
 
 			var data_stats			= new Array();
@@ -32,18 +32,18 @@ function grabInfo(pend) {
 			//console.log(latestMatches);
 
 		  // In stats find
-				data_stats = [{ 
-					time: 		stats[0].childNodes[1].innerHTML, 
+				data_stats = { 
+					time: 			stats[0].childNodes[1].innerHTML, 
 					win: 			stats[1].childNodes[1].childNodes[0].childNodes[0].textContent,
 					loss: 			stats[1].childNodes[1].childNodes[0].childNodes[2].textContent,
 					abandon: 		stats[1].childNodes[1].childNodes[0].childNodes[4].textContent,
 					winrate: 		stats[2].childNodes[1].textContent
-				}]
+				}
 				//console.log(data_stats);
 
 		  // For each matched in mostPlayed
 			$.each(mostPlayed, function(i, tr) {
-				data_mostPlayed[i] = [{ 
+				data_mostPlayed[i] = { 
 					hero: 			tr.childNodes[1].childNodes[0].innerText, 
 					matches: 		tr.childNodes[2].childNodes[0].textContent,
 					winrate: 		tr.childNodes[3].childNodes[0].textContent,
@@ -52,13 +52,13 @@ function grabInfo(pend) {
 					bar_matches: 	tr.childNodes[2].childNodes[1].innerHTML,
 					bar_winrate: 	tr.childNodes[3].childNodes[1].innerHTML,
 					bar_kda: 		tr.childNodes[4].childNodes[1].innerHTML
-				}]
+				}
 				//console.log(data_mostPlayed);
 			})
 
 		  // For each matched in latestMatches
 			$.each(latestMatches, function(i, tr) {
-				data_latestMatches[i] = [{ 
+				data_latestMatches[i] = { 
 					hero: 			tr.childNodes[1].childNodes[0].innerText,
 					result: 		tr.childNodes[2].childNodes[0].innerText,
 					link_result:	tr.childNodes[2].childNodes[0].pathname,
@@ -71,7 +71,7 @@ function grabInfo(pend) {
 					mode: 			tr.childNodes[3].childNodes[1].innerText,
 					bar_duration: 	tr.childNodes[4].childNodes[1].innerHTML,
 					bar_kda: 		tr.childNodes[5].childNodes[1].innerHTML
-				}]
+				}
 				//console.log(data_latestMatches);
 			})
 
@@ -100,7 +100,7 @@ function grabInfo(pend) {
 				}
 				$.each(tbody.childNodes, function(i, tr) {
 
-					category_array[i] = [{ 
+					category_array[i] = { 
 						category: 		category,
 						stat: 			tr.childNodes[0].innerText,
 						matches: 		tr.childNodes[1].innerText,
@@ -108,7 +108,7 @@ function grabInfo(pend) {
 
 						bar_matches: 	tr.childNodes[1].childNodes[1].innerHTML,
 						bar_winrate: 	tr.childNodes[2].childNodes[1].innerHTML
-					}]
+					}
 				})
 				data_lifetimeStats[i] = category_array;
 				//console.log(data_lifetimeStats);
@@ -117,7 +117,7 @@ function grabInfo(pend) {
 		  // For each matched in friends
 			$.each(friends, function(i, tr) {
 			  if (tr.textContent != "No Friends") {
-			  	data_friends[i] = [{ 
+			  	data_friends[i] = { 
 					image: 			tr.childNodes[0].childNodes[0].childNodes[0].childNodes[0].src,
 					friend: 		tr.childNodes[1].innerHTML,
 					matches: 		tr.childNodes[2].innerText,
@@ -125,7 +125,7 @@ function grabInfo(pend) {
 
 					bar_matches: 	tr.childNodes[2].childNodes[1].innerHTML,
 					bar_winrate: 	tr.childNodes[3].childNodes[1].innerHTML
-				}]
+				}
 			  }
 				//console.log(data_friends);
 			})
