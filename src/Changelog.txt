@@ -15,3 +15,9 @@
 // Version 0.1.4
 - Optimized some stupid mistakes in the code...
 - Enabled async ajax request. Which should make opening the extension more responsive. (Was disabled out of habit because of issues in the past.)
+
+// Version 0.1.5
+- Friend links will now show in the extension rather than opening the dotabuff page.
+- Fixed some issues with certain dotabuff profiles(Such as having no abandons or a team membership, which would cause errors).
+- Fixed some issues with the time since calculations.
+- Adjusted the layout of certain cells and added the missing color for abandoned matches.

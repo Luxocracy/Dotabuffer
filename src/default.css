@@ -154,6 +154,8 @@ div .loadingtrail
 	color: #979797;
 }
 
+
+/* Rows -- General */
 .type-row, .type-row-lifetime-stats
 {
 	background: #303030;
@@ -162,7 +164,7 @@ div .loadingtrail
 	padding-top: 5px;
 }
 
-.match-inline-row, .match-inline-row-lifetime-stats, .match-inline-row-friend
+.match-inline-row, .match-inline-row-lifetime-stats, .match-inline-row-friend, .match-inline-row-most-played
 {
 	display: inline-block;
 	height: 32px;
@@ -171,7 +173,7 @@ div .loadingtrail
 	padding-top: 2px;
 }
 
-.match-top-row, .match-top-row-friend, .match-top-row-lifetime-stats
+.match-top-row, .match-top-row-friend, .match-top-row-lifetime-stats, .match-top-row-most-played
 {
 	display: inline-block;
 	text-align: left;
@@ -179,66 +181,14 @@ div .loadingtrail
 	padding-top: 3px;
 }
 
-.match-row:nth-of-type(even), .match-row-friend:nth-of-type(even)
+.match-row:nth-of-type(even)
 {
 	background: rgba(255, 255, 255, 0.08);
 }
 
-.match-row:nth-of-type(odd), .match-row-friend:nth-of-type(even)
+.match-row:nth-of-type(odd)
 {
 	background: rgba(255, 255, 255, 0.04);
-}
-
-.match-inline-row:nth-of-type(1)
-{
-	width: 8.5%;
-	padding-top: 0px;
-}
-
-.match-inline-row:nth-of-type(2), .match-inline-row-friend:nth-of-type(2)
-{
-	width: 20%;
-}
-
-.match-inline-row:nth-of-type(3), .match-top-row:nth-of-type(2), .match-inline-row-friend:nth-of-type(3), .match-top-row-friend:nth-of-type(2)
-{
-	width: 16%;
-}
-
-.match-inline-row:nth-of-type(4), .match-top-row:nth-of-type(3), .match-inline-row-friend:nth-of-type(4), .match-top-row-friend:nth-of-type(3)
-{
-	width: 14%;
-}
-
-.match-inline-row:nth-of-type(5), .match-top-row:nth-of-type(4)
-{
-	width: 20%;
-}
-
-.match-inline-row:nth-of-type(6), .match-top-row:nth-of-type(5)
-{
-	width: 21.5%;
-}
-
-.match-top-row:nth-of-type(1)
-{
-	width: 28.5%;
-}
-
-.match-top-row-lifetime-stats, .match-inline-row-lifetime-stats
-{
-	width: 20%;
-}
-
-.match-inline-row-friend:nth-of-type(1)
-{
-	width: 6%;
-	padding-top: 0px;
-}
-
-.match-top-row-friend:nth-of-type(1)
-{
-	width: 26%;
 }
 
 .hero-image
@@ -261,6 +211,120 @@ div .loadingtrail
 	color: #c23c2a;
 	text-decoration: none;
 }
+.top-row-abandoned, .top-row-abandoned a
+{
+	color: #a6a6a6;
+	text-decoration: none;
+}
+
+/* Rows -- Latest Matches */
+  /* Hero */
+	.match-top-row:nth-of-type(1)
+	{
+		width: 26.5%;
+	}
+  /* Image */
+	.match-inline-row:nth-of-type(1)
+	{
+		width: 8.5%;
+		padding-top: 0px;
+	}
+  /* Hero Name */
+	.match-inline-row:nth-of-type(2)
+	{
+		width: 18%;
+	}
+  /* Result */
+	.match-inline-row:nth-of-type(3), .match-top-row:nth-of-type(2)
+	{
+		width: 14%;
+	}
+  /* Match Type */
+	.match-inline-row:nth-of-type(4), .match-top-row:nth-of-type(3)
+	{
+		width: 20%;
+	}
+  /* Duration */
+	.match-inline-row:nth-of-type(5), .match-top-row:nth-of-type(4)
+	{
+		width: 18%;
+	}
+  /* KDA */
+	.match-inline-row:nth-of-type(6), .match-top-row:nth-of-type(5)
+	{
+		width: 21.5%;
+	}
+
+/* Rows -- Most Played */
+  /* Hero */
+	.match-top-row-most-played:nth-of-type(1)
+	{
+		width: 26.5%;
+	}
+  /* Image */
+	.match-inline-row-most-played:nth-of-type(1)
+	{
+		width: 8.5%;
+		padding-top: 0px;
+	}
+  /* Hero Name */
+	.match-inline-row-most-played:nth-of-type(2)
+	{
+		width: 18%;
+	}
+  /* Matches Played */
+	.match-inline-row-most-played:nth-of-type(3), .match-top-row-most-played:nth-of-type(2)
+	{
+		width: 20%;
+	}
+  /* Winrate */
+	.match-inline-row-most-played:nth-of-type(4), .match-top-row-most-played:nth-of-type(3)
+	{
+		width: 20%;
+	}
+  /* KDA */
+	.match-inline-row-most-played:nth-of-type(5), .match-top-row-most-played:nth-of-type(4)
+	{
+		width: 20%;
+	}
+
+/* Rows -- Lifetime Stats */
+	.match-top-row-lifetime-stats:nth-of-type(1), .match-inline-row-lifetime-stats:nth-of-type(1)
+	{
+		width: 27.2%;
+	}
+
+	.match-top-row-lifetime-stats, .match-inline-row-lifetime-stats
+	{
+		width: 20.5%;
+	}
+
+/* Rows -- Friends */
+	.match-inline-row-friend:nth-of-type(1)
+	{
+		width: 6.5%;
+		padding-top: 0px;
+	}
+
+	.match-top-row-friend:nth-of-type(1)
+	{
+		width: 26.5%;
+	}
+
+	.match-inline-row-friend:nth-of-type(2)
+	{
+		width: 20%;
+	}
+
+	.match-inline-row-friend:nth-of-type(3), .match-top-row-friend:nth-of-type(2)
+	{
+		width: 20%;
+	}
+
+	.match-inline-row-friend:nth-of-type(4), .match-top-row-friend:nth-of-type(3)
+	{
+		width: 20%;
+	}
 
 /*----- Bar Segments -----*/
 .bar {

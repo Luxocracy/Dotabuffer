@@ -4,7 +4,7 @@ Dotabuffer
 Currently this will only show you your Latest Matches, Most Played Heroes, Lifetime Stats and Friend Stats.
 
 #### Screenshot
-![Dotabuffer Screenshot](http://i.imgur.com/RjBEMHk.png "Dotabuffer Dropdown Screenshot")
+![Dotabuffer Screenshot](http://i.imgur.com/UBT8bMo.jpg "Dotabuffer Dropdown Screenshot")
 
 ## Download
 * Chrome Users: [Dotabuffer-master.zip](https://github.com/luxocracy/dotabuffer/archive/master.zip)
@@ -16,7 +16,8 @@ Currently this will only show you your Latest Matches, Most Played Heroes, Lifet
 2. Extract it to a folder. (If you cloned the project skip to step 3.)
 3. Navigate to your extension page(chrome://extensions) and check the "Developer mode" box
 4. Click the "Load unpacked extension..." button and navigate to the project folder, then select the folder named "src" and hit ok.
-5. The extension should now be loaded.
+5. The extension should now be loaded.  
+_\*On older versions of Chrome the Opera method will also work, on newer versions it will be force disabled when the browser is restarted._
 
 ### For Opera Users
 1. Download the [.crx file](https://github.com/Luxocracy/Dotabuffer/blob/master/Dotabuffer%20-release.crx?raw=true).
@@ -26,9 +27,11 @@ Currently this will only show you your Latest Matches, Most Played Heroes, Lifet
 5. The extension should now be loaded.
 
 ## Version 
-* Version 0.1.4
-* - Optimized some stupid mistakes in the code...
-* - Enabled async ajax request. Which should make opening the extension more responsive. (Was disabled out of habit because of issues in the past.)
+* Version 0.1.5
+  * Friend links will now show in the extension rather than opening the dotabuff page.
+  * Fixed some issues with certain dotabuff profiles(Such as having no abandons or a team membership, which would cause errors).
+  * Fixed some issues with the time since calculations.
+  * Adjusted the layout of certain cells and added the missing color for abandoned matches.
 
 [Full Changelog](https://github.com/Luxocracy/Dotabuffer/blob/master/src/Changelog.txt)
 

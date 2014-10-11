@@ -10,7 +10,7 @@
 		"'":"" 
 	};
 
-fetchData(); // Run fetchData function
+fetchData(localStorage["player_id"]); // Run fetchData function
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	if (request.msg == "none") {
@@ -38,16 +38,20 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 // Send message to background script to fetch data.
-function fetchData() {
+function fetchData(playerID) {
 	if (localStorage["player_id"] == "" || localStorage["player_id"] == undefined) {
 		noPlayerID();
 	} else {
-		// $('body').css("opacity", "0.6");
-		// $('div#float').empty();
-		// $('div#float').show();
-		// $('div#float').prepend("<div id='loading' class='loadingtrail'></div>");
+		$('body').css("opacity", "0.6");
+		$('div#float').css("top", "50%");
+  		$('div#float').css("left", "45%");
+		$('div#float').empty();
+		$('div#float').show();
+		$('div#float').prepend("<div id='loading' class='loadingtrail'></div>");
 
-	chrome.runtime.sendMessage({msg: "GrabInfo", from: "Dropdown"});
+
+
+	chrome.runtime.sendMessage({msg: "GrabInfo", playerID: playerID, from: "Dropdown"});
 	}
 }
 
@@ -75,10 +79,10 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
 
   // Type menus for Most Played
   	var divs_mostPlayed = [
-  		'<div class="match-top-row">Hero</div>',
-  		'<div class="match-top-row">Matches Played</div>',
-  		'<div class="match-top-row">Win Rate</div>',
-  		'<div class="match-top-row">KDA Ratio</div>',
+  		'<div class="match-top-row-most-played">Hero</div>',
+  		'<div class="match-top-row-most-played">Matches Played</div>',
+  		'<div class="match-top-row-most-played">Win Rate</div>',
+  		'<div class="match-top-row-most-played">KDA Ratio</div>',
 	];
 
 	$('div#most-played').append('<div class="type-row"></div>');
@@ -136,11 +140,11 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
 		$('div#most-played').append('<div class="match-row"></div>');
 		var count = 2 + i;
 		var div_append = [
-			'<div class="match-inline-row"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><img alt="'+ data.hero +'" class="hero-image" src="http://www.dotabuff.com/assets/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'.png"></a></div>',
-			'<div class="match-inline-row"><div class="top-row-won-match"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'">'+ data.hero +'</a></div><div class="bot-row"></div>',
-			'<div class="match-inline-row"><div class="top-row">'+ data.matches +'</div><div class="bot-row bar">'+ data.bar_matches +'</div></div>',
-			'<div class="match-inline-row"><div class="top-row">'+ data.winrate +'</div><div class="bot-row bar">'+ data.bar_winrate +'</div></div>',
-			'<div class="match-inline-row"><div class="top-row">'+ data.kda +'</div><div class="bot-row bar">'+ data.bar_kda +'</div></div>'
+			'<div class="match-inline-row-most-played"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'"><img alt="'+ data.hero +'" class="hero-image" src="http://www.dotabuff.com/assets/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'.png"></a></div>',
+			'<div class="match-inline-row-most-played"><div class="top-row-won-match"><a class="tab-link" href="http://dotabuff.com/heroes/'+ data.hero.replace(rMapped, function(matched) { return eMapped[matched] }).toLowerCase() +'">'+ data.hero +'</a></div><div class="bot-row"></div>',
+			'<div class="match-inline-row-most-played"><div class="top-row">'+ data.matches +'</div><div class="bot-row bar">'+ data.bar_matches +'</div></div>',
+			'<div class="match-inline-row-most-played"><div class="top-row">'+ data.winrate +'</div><div class="bot-row bar">'+ data.bar_winrate +'</div></div>',
+			'<div class="match-inline-row-most-played"><div class="top-row">'+ data.kda +'</div><div class="bot-row bar">'+ data.bar_kda +'</div></div>'
 		];
 		$('div#most-played div.match-row:nth-of-type('+ count +')').append(div_append);
 	})
@@ -165,18 +169,18 @@ function createDivs(data_stats, data_mostPlayed, data_latestMatches, data_lifeti
 
   // Create divs for Friends Tab
 	$.each(data_friends, function(i, data) {
-		$('div#friends').append('<div class="match-row-friend"></div>');
+		$('div#friends').append('<div class="match-row"></div>');
 		var count = 2 + i;
 		var div_append = [
 			'<div class="match-inline-row-friend"><img class="hero-image" src="'+ data.image +'"></div>',
-			'<div class="match-inline-row-friend"><div class="top-row-won-match">'+ data.friend.replace("/players/", "http://www.dotabuff.com/players/").replace('<a ', '<a class="tab-link"') +'</div><div class="bot-row"></div>',
+			'<div class="match-inline-row-friend"><div class="top-row-won-match">'+ data.friend.replace("/players/", "http://www.dotabuff.com/players/").replace('<a ', '<a class="friend-link"') +'</div><div class="bot-row"></div>',
 			'<div class="match-inline-row-friend"><div class="top-row">'+ data.matches +'</div><div class="bot-row bar">'+ data.bar_matches +'</div></div>',
 			'<div class="match-inline-row-friend"><div class="top-row">'+ data.winrate +'</div><div class="bot-row bar">'+ data.bar_winrate +'</div></div>'
 		];
-		$('div#friends div.match-row-friend:nth-of-type('+ count +')').append(div_append);
+		$('div#friends div.match-row:nth-of-type('+ count +')').append(div_append);
 	})
 
-	attachListener(); // Attach the <a class="tab-link"> listener
+	attachListeners(); // Attach the <a class="tab-link"> listener
 }
 
 // Function that calculates the time since the match was played.
@@ -200,19 +204,27 @@ function calculateTime (data) {
 		if (timeSince.since == 1) { endText = " year ago" } else { endText = " years ago" };
 	} else if (timeSince.days >= 30) {
 		timeSince.since = Math.round(timeSince.days / 30);
-		if (months == 1) { endText = " month ago" } else { endText = " months ago" };
+		if (timeSince.since == 1) { endText = " month ago" } else { endText = " months ago" };
 	} else if (timeSince.days >= 1) {
 		timeSince.since = timeSince.days;
-		if (timeSince.days == 1) { endText = " day ago" } else { endText = " days ago" };
+		if (timeSince.since == 1) { endText = " day ago" } else { endText = " days ago" };
 	} else if (timeSince.hours >= 1) {
 		timeSince.since = timeSince.hours;
-		if (timeSince.days == 1) { endText = " hour ago" } else { endText = " hours ago" };
+		if (timeSince.since == 1) { endText = " hour ago" } else { endText = " hours ago" };
 	} else {
 		timeSince.since = timeSince.minutes;
-		if (timeSince.days <= 1) { endText = " minute ago" } else { endText = " minutes ago" };
+		if (timeSince.since <= 1) { endText = " minute ago" } else { endText = " minutes ago" };
 	}
 	timeSince.since = timeSince.since + endText;
 	return timeSince.since;
+}
+
+// Function that is run when you click on friends profile under the friends tab
+function friendID(playerID) {
+	$("div.tab-content div.tab").each(function(i, data) {
+		$(data).empty();
+	})
+	fetchData(playerID);
 }
 
 // Function that is run when noPlayerID could be found in localStorage
@@ -256,11 +268,16 @@ function removePopup() {
 }
 
 // Function that attaches the <a class="tab-link"> listener
-function attachListener () {
+function attachListeners () {
 	$('a.tab-link').on('click', function(event) {
 		event.preventDefault();
 		openTab(event.currentTarget.href)
 	})
+	$('a.friend-link').on('click', function(event) {
+		event.preventDefault();
+		friendID(event.currentTarget.href.replace("http://www.dotabuff.com/players/", ""))
+	})
+	removePopup();
 }
 
 // Function that is run when a link is clicked 

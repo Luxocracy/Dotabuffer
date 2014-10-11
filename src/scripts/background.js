@@ -1,15 +1,17 @@
 // Listen for a message to trigger the grabInfo function
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	if (request.msg == "GrabInfo") {
-		grabInfo();
+		grabInfo(request.playerID);
 		sendResponse({msg: "done"});
 	}
 });
 
-// Function for grabbing manga information
-function grabInfo(pend) {
 
-	var currenturl = "http://www.dotabuff.com/players/" + localStorage["player_id"];
+
+// Function for grabbing manga information
+function grabInfo(playerID) {
+
+	var currenturl = "http://www.dotabuff.com/players/" + playerID;
 
 	$.ajax({     
 		type: "GET",		
@@ -29,14 +31,25 @@ function grabInfo(pend) {
 			var latestMatches 		= $(html).find('div.primary section:nth-of-type(2) article table tbody tr');
 			var lifetimeStats 		= $(html).find('div.secondary section:nth-of-type(1) article table tbody');
 			var friends				= $(html).find('div.secondary section:nth-of-type(2) article table tbody tr');
+			
+			if (friends[0].parentNode.parentNode.parentNode.parentNode.childNodes[0].innerText == "Team Membership") {
+				friends = $(html).find('div.secondary section:nth-of-type(3) article table tbody tr');
+			}
 			//console.log(latestMatches);
 
 		  // In stats find
+		      // Check if abandons exist
+		  		if (stats[1].childNodes[1].childNodes[0].childNodes.length == 5) {
+		  			var stats_abandons = stats[1].childNodes[1].childNodes[0].childNodes[4].textContent;
+		  		} else {
+		  			var stats_abandons = "0";
+		  		}
+		  	  // Add stat values to object
 				data_stats = { 
 					time: 			stats[0].childNodes[1].innerHTML, 
 					win: 			stats[1].childNodes[1].childNodes[0].childNodes[0].textContent,
 					loss: 			stats[1].childNodes[1].childNodes[0].childNodes[2].textContent,
-					abandon: 		stats[1].childNodes[1].childNodes[0].childNodes[4].textContent,
+					abandon: 		stats_abandons,
 					winrate: 		stats[2].childNodes[1].textContent
 				}
 				//console.log(data_stats);
