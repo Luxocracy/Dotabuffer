@@ -32,6 +32,7 @@ _\*On older versions of Chrome the Opera method will also work, on newer version
   * Fixed some issues with certain dotabuff profiles(Such as having no abandons or a team membership, which would cause errors).
   * Fixed some issues with the time since calculations.
   * Adjusted the layout of certain cells and added the missing color for abandoned matches.
+  * Enabled loadingtrail, which was already in the code but not in use.
 
 [Full Changelog](https://github.com/Luxocracy/Dotabuffer/blob/master/src/Changelog.txt)
 
